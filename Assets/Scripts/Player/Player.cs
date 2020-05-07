@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour
 {
@@ -108,8 +110,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("CURRENT FUEL: " + _fuelTank + " ANd health = " + _health);
-        FuelUI.instance.UpdateFuel((int)_fuelTank, (int)_maxFuel);
+        Debug.Log("CURRENT FUEL: " + _fuelTank + " ANd health = " + _health);
+        //FuelUI.instance.UpdateFuel((int)_fuelTank, (int)_maxFuel);
         //shoot
         if (Input.GetMouseButton(0))
         {
@@ -210,16 +212,6 @@ public class Player : MonoBehaviour
             Rigidbody rB = nearbyObject.GetComponent<Rigidbody>();
             if (rB != null)
             {
-
-
-                rB.AddForce(Camera.main.transform.forward * 7);
-
-
-                rB.AddForce(Camera.main.transform.forward * 7);
-
-
-    
-                rB.AddForce(Camera.main.transform.forward * 7);
                 rB.AddForce(Camera.main.transform.forward * 7);
 
                 _controller.transform.position = transform.position;

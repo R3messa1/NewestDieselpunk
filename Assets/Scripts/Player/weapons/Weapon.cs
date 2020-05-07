@@ -11,20 +11,42 @@ public class Weapon : MonoBehaviour
     [SerializeField] public GameObject Muzzle;
     public Animator _animator;
 
+    [SerializeField]
+    private GameObject _muzzleFlashPrefabLeft;
+    [SerializeField]
+    private GameObject _muzzleFlashPrefabRight;
+
+    [SerializeField]
+    private int _maxAmmo = 100;
+    [SerializeField]
+    private int _startingAmmo = 20;
+    private int _ammo;
+
     private void Start()
     {
+        _muzzleFlashPrefabLeft.SetActive(false);
+        _muzzleFlashPrefabRight.SetActive(false);
         Muzzle.SetActive(false);
         _animator = this.GetComponent<Animator>();
+        _ammo = _startingAmmo;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-       if (Input.GetButton("Fire1"))
+       if (Input.GetButton("Fire1") && _ammo > 0)
         {
+            _muzzleFlashPrefabLeft.SetActive(true);
+            _muzzleFlashPrefabRight.SetActive(true);
+            _ammo -= 1;
             Shoot();
         }
+       else if(Input.GetButtonUp("Fire1") || _ammo <= 0)
+        {
+            _muzzleFlashPrefabLeft.SetActive(false);
+            _muzzleFlashPrefabRight.SetActive(false);
+        }
+        Debug.Log("ammo: " + _ammo);
     }
 
     void sound()
@@ -44,7 +66,7 @@ public class Weapon : MonoBehaviour
 
 private void Shoot()
     {
-
+        
 
         //sound();
 

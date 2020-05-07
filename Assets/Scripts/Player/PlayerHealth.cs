@@ -37,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
         if (damaged)
         {
             // ... set the colour of the damageImage to the flash colour.
-      //      damageImage.color = flashColour;
+           damageImage.color = flashColour;
         }
         // Otherwise...
         else

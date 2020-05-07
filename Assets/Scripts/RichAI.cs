@@ -156,7 +156,7 @@ public class RichAI : MonoBehaviour
             else if ((runAway || runTo) && (distance < runDistance) && (!executeBufferState))
             { //make sure they do not get too close to the target
 
-                //AHH! RUN AWAY!...  or possibly charge :D
+                
 
                 enemyCanAttack = false; //can't attack, we're running!
 
@@ -488,6 +488,7 @@ public class RichAI : MonoBehaviour
     {
         _anim.SetTrigger("Stun");
         transform.Translate(Vector3.up * 7);
+        transform.Translate(-Vector3.forward * 7);
     }
 
     //continuous gravity checks

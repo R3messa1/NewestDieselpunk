@@ -115,23 +115,18 @@ public class Player : MonoBehaviour
         //shoot
         if (Input.GetMouseButton(0))
         {
+          
             _muzzleFlashPrefabLeft.SetActive(true);
-            Ray rayOrigin = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            RaycastHit hitInfo;
-
+          
             bool isShootingPressed = true;
-            _animator.SetBool("isshooting", isShootingPressed);
-
-            if (Physics.Raycast(rayOrigin, out hitInfo))
-            {
-
-            }
+            _animator.SetBool("isshooting2", isShootingPressed);
+           
         }
         else
         {
             _muzzleFlashPrefabLeft.SetActive(false);
             bool isShootingPressed = false;
-            _animator.SetBool("isshooting", isShootingPressed);
+            _animator.SetBool("isshooting2", isShootingPressed);
         }
 
         if (Input.GetMouseButton(1))

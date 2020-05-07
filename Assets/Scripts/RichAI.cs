@@ -504,6 +504,15 @@ public class RichAI : MonoBehaviour
         StartCoroutine(StunRecover());
     }
 
+    public void HomeRun()
+    {
+        _anim.SetTrigger("Stun");
+        transform.Translate(Vector3.up * 3);
+        transform.Translate(-Vector3.forward * 10);
+        _stunned = true;
+        StartCoroutine(StunRecover());
+    }
+
     IEnumerator StunRecover()
     {
         yield return new WaitForSeconds(_stunLenght);

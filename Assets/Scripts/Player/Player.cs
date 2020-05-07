@@ -171,6 +171,7 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
             SceneManager.LoadScene(3);
         }
+
     }
 
     public void AddAmmo()
@@ -361,6 +362,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(_slamCooldown);
         _slamUsed = false;
+    }
+
+    public void HitFountain()
+    {
+        _controller.Move(Vector3.up * 500 * Time.deltaTime);
     }
 
     public void TakeDamage(float amount)

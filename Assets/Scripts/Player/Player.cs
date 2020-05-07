@@ -130,10 +130,19 @@ public class Player : MonoBehaviour
         
             if (Input.GetMouseButton(0))
             {
+               if (_weaponSwitched = true)
+                { 
                 _muzzleFlashPrefabLeft.SetActive(true);
 
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting2", isShootingPressed);
+                }
+                else 
+                {
+
+                _animator.SetTrigger("swing");
+
+                }
             }
             else
             {

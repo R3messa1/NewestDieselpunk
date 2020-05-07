@@ -7,6 +7,13 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float hitPoints = 100f;
     [SerializeField]
     private GameObject _GibPrefab;
+    [SerializeField]
+    private GameObject HUD;
+
+    public void Start()
+    {
+        
+    }
 
     public void TakeDamage(float damage)
     {
@@ -15,6 +22,11 @@ public class EnemyHealth : MonoBehaviour
         {
             Destroy(gameObject);
             Instantiate(_GibPrefab, transform.position, _GibPrefab.transform.rotation);
+            HUD = GameObject.Find("HUD");
+
+            KillCounter _killcounter = HUD.GetComponent<KillCounter>();
+
+            _killcounter.EnemyKilled();
         }
     }
 }

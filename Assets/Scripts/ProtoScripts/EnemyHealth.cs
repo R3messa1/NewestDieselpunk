@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float hitPoints = 100f;
-    [SerializeField]
-    private GameObject _GibPrefab;
+    //[SerializeField]
+    //private GameObject _GibPrefab;
     private GameObject HUD;
 
     public void Start()

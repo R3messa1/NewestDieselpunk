@@ -68,6 +68,7 @@ public class RichAI : MonoBehaviour
         _anim = this.GetComponent<Animator>();
         //_player = GameObject.Find("Player").GetComponent<Player>();
 
+        target = GameObject.Find("Player").transform;
         StartCoroutine(Initialize()); //co-routine is used incase you need to interupt initiialization until something else is done.
     }
 
@@ -94,7 +95,7 @@ public class RichAI : MonoBehaviour
         {
             AIFunctionality();
         }
-        Offense();
+        //Offense();
     }
 
     public void TooPrettyToDie()
@@ -253,7 +254,9 @@ public class RichAI : MonoBehaviour
             while (enemyCanAttack)
             {
                 lastShotFired = Time.time;
+                Offense();
                 yield return new WaitForSeconds(attackTime);
+
             }
         }
     }

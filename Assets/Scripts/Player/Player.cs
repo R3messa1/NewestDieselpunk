@@ -134,7 +134,9 @@ public class Player : MonoBehaviour
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting2", isShootingPressed);
 
-            }
+                _animator.SetTrigger("swing");
+
+        }
             else
             {
                 _muzzleFlashPrefabLeft.SetActive(false);
@@ -158,17 +160,7 @@ public class Player : MonoBehaviour
                 _animator.SetBool("isshooting", isShootingPressed);
             }
         
-        if (_weaponSwitched = false)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _animator.SetTrigger("swing");
-            }
-            else
-            {
-
-            }
-        }
+     
 
         CalculateMovement();
         FuelCheck();

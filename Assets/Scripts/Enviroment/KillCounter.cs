@@ -9,7 +9,7 @@ public class KillCounter : MonoBehaviour
 
     [SerializeField] private Text killCounter;
 
-    private int numOfKills = 0;
+    public int numOfKills = 0;
 
     public void Start()
     {
@@ -28,5 +28,6 @@ public class KillCounter : MonoBehaviour
         if (numOfKills == 90)
             PollHandler.instance.WaveFinished();
         killCounter.text = numOfKills.ToString();
+        
     }
 }

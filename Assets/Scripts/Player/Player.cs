@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -88,6 +89,13 @@ public class Player : MonoBehaviour
     private float _slamCooldown = 2f;
 
     public Animator _animator;
+    public Slider healthSlider;
+    public Image damageImage;
+    public float flashSpeed = 5f;
+    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+
+    [SerializeField]
+    private DamageEffect _dmgfx;
 
     // Start is called before the first frame update
     void Start()
@@ -105,6 +113,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         _controller = GetComponent<CharacterController>();
+        _dmgfx = GameObject.Find("DamageFx").GetComponent<DamageEffect>();
     }
 
     // Update is called once per frame
@@ -130,7 +139,7 @@ public class Player : MonoBehaviour
         
             if (Input.GetMouseButton(0))
             {
-               if (_weaponSwitched = true)
+               if (_weaponSwitched == true)
                 { 
                 _muzzleFlashPrefabLeft.SetActive(true);
 
@@ -202,6 +211,7 @@ public class Player : MonoBehaviour
         if (_health <= 0)
         {
             Destroy(this.gameObject);
+            SceneManager.LoadScene(3);
         }
 
   
@@ -392,6 +402,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(float amount)
     {
         _health -= amount;
+        damageImage.color = flashColour;
+        _dmgfx.TakeDamage();
     }
 
     public void FuelHeal()

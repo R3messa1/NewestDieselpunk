@@ -63,10 +63,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _healFuelCost = 10f;
     [SerializeField]
-    private GameObject _muzzleFlashPrefabLeft;
-    [SerializeField]
-    private GameObject _muzzleFlashPrefabRight;
-    [SerializeField]
     private GameObject _slamDirtPrefab;
     [SerializeField]
     private GameObject _jetTrailPrefab;
@@ -101,8 +97,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         _animator = this.GetComponent<Animator>();
-        _muzzleFlashPrefabLeft.SetActive(false);
-        _muzzleFlashPrefabRight.SetActive(false);
 
         _MeleeWeapon.SetActive(true);
         _guns.SetActive(false);
@@ -141,21 +135,17 @@ public class Player : MonoBehaviour
             {
                if (_weaponSwitched == true)
                 { 
-                _muzzleFlashPrefabLeft.SetActive(true);
 
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting2", isShootingPressed);
                 }
                 else 
                 {
-
                 _animator.SetTrigger("swing");
-
                 }
             }
             else
             {
-                _muzzleFlashPrefabLeft.SetActive(false);
                 
                 bool isShootingPressed = false;
                 _animator.SetBool("isshooting2", isShootingPressed);
@@ -163,21 +153,19 @@ public class Player : MonoBehaviour
 
             if (Input.GetMouseButton(1))
             {
-                _muzzleFlashPrefabRight.SetActive(true);
 
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting", isShootingPressed);
             }
             else
             {
-                _muzzleFlashPrefabRight.SetActive(false);
                 bool isShootingPressed = false;
                 _animator.SetBool("isshooting", isShootingPressed);
             }
         
 
 
-            CalculateMovement();
+        CalculateMovement();
         FuelCheck();
 
         if (Input.GetKey(KeyCode.Q) && _fuelAvailable && _health < _maxHealth)

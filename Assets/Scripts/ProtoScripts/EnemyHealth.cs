@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float hitPoints = 100f;
-    //[SerializeField]
-    //private GameObject _GibPrefab;
+    [SerializeField]
+    private GameObject _GibPrefab;
     [SerializeField]
     private GameObject _ammoDrop;
     private GameObject HUD;
@@ -32,7 +32,7 @@ public class EnemyHealth : MonoBehaviour
         if (hitPoints <= 0)
         {
             Destroy(gameObject);
-            //Instantiate(_GibPrefab, transform.position, _GibPrefab.transform.rotation);
+            Instantiate(_GibPrefab, transform.position, transform.rotation);
             Instantiate(_ammoDrop, transform.position, _ammoDrop.transform.rotation);
             HUD = GameObject.Find("HUD");
 

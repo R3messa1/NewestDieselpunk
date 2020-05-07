@@ -27,20 +27,15 @@ public class GoreExplosion : MonoBehaviour
         intenstinesMaterial.color = color;
         heartMaterial.color = color;
 
+        StartCoroutine(SelfDestruct());
+
     }
         
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-
-            StartCoroutine("Explosion");
-
-        }
-
+        StartCoroutine("Explosion");
     }
 
 
@@ -86,6 +81,12 @@ public class GoreExplosion : MonoBehaviour
             yield return 0;
         }
 
+    }
+
+    IEnumerator SelfDestruct()
+    {
+        yield return new WaitForSeconds(4);
+        Destroy(this.gameObject);
     }
 
 }

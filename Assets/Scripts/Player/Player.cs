@@ -144,6 +144,8 @@ public class Player : MonoBehaviour
             bool isShootingPressed = false;
             _animator.SetBool("isshooting", isShootingPressed);
         }
+
+
         CalculateMovement();
         FuelCheck();
 
@@ -204,10 +206,12 @@ public class Player : MonoBehaviour
 
         foreach (Collider nearbyObject in colliders)
         {
-            RichAI rAI = nearbyObject.GetComponent<RichAI>();
-            if (rAI != null)
+            Rigidbody rB = nearbyObject.GetComponent<Rigidbody>();
+            if (rB != null)
             {
-                rAI.Pounded();
+                rB.AddForce(Camera.main.transform.forward * 7);
+
+                _controller.transform.position = transform.position;
             }
         }
 

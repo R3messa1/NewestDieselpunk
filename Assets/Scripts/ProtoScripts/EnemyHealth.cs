@@ -9,6 +9,9 @@ public class EnemyHealth : MonoBehaviour
     //private GameObject _GibPrefab;
     private GameObject HUD;
 
+    [SerializeField]
+    private float _TooWeakToFight = 20f;
+
     public void Start()
     {
         
@@ -17,6 +20,13 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         hitPoints -= damage;
+
+        if(hitPoints < _TooWeakToFight)
+        {
+            RichAI rAI = this.GetComponent<RichAI>();
+            rAI.TooPrettyToDie();
+        }
+
         if (hitPoints <= 0)
         {
             Destroy(gameObject);

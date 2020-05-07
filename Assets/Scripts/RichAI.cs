@@ -66,7 +66,7 @@ public class RichAI : MonoBehaviour
     void Start()
     {
         _anim = this.GetComponent<Animator>();
-        _player = GameObject.Find("Player").GetComponent<Player>();
+        //_player = GameObject.Find("Player").GetComponent<Player>();
 
         StartCoroutine(Initialize()); //co-routine is used incase you need to interupt initiialization until something else is done.
     }
@@ -95,6 +95,12 @@ public class RichAI : MonoBehaviour
             AIFunctionality();
         }
         Offense();
+    }
+
+    public void TooPrettyToDie()
+    {
+        runAway = true;
+        runTo = false;
     }
 
 

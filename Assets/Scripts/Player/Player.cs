@@ -73,9 +73,6 @@ public class Player : MonoBehaviour
     private GameObject _guns;
     [SerializeField]
     private GameObject _MeleeWeapon;
-    //incredibly poor solution for making tab a toggle
-    private bool _weaponSwitched;
-    private int _ammo;
 
     //Smashstuff :3
     [SerializeField]
@@ -174,11 +171,6 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
             SceneManager.LoadScene(3);
         }
-    }
-
-    public void AmmoQuery(int ammo)
-    {
-        _ammo = ammo;
     }
 
     public void AddAmmo()

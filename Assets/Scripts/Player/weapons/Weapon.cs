@@ -49,6 +49,7 @@ public class Weapon : MonoBehaviour
 
     IEnumerator FireRate()
     {
+        sound();
         _canFire = false;
         Shoot();
         yield return new WaitForSeconds(_timeBetweenShots);

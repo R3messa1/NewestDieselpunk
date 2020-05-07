@@ -21,6 +21,8 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private int _startingAmmo = 20;
     private int _ammo;
+    [SerializeField]
+    private int _ammoPickupAmount = 15;
     private bool _canFire = true;
     [SerializeField]
     private float _timeBetweenShots = 0.1f;
@@ -96,5 +98,10 @@ private void Shoot()
         {
             return;
         }
+    }
+
+    public void AddAmmo()
+    {
+        _ammo += _ammoPickupAmount;
     }
 }

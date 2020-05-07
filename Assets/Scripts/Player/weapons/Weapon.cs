@@ -59,17 +59,7 @@ public class Weapon : MonoBehaviour
 
     void sound()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            SoundManager.sndMan.PlayGunSound();
-
-        }
-
-       if (Input.GetButtonDown("Fire1"))
-        { 
-            Shoot();          
-        } 
-
+        SoundManager.sndMan.PlayGunSound();
     }
 
 private void Shoot()

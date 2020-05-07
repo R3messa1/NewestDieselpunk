@@ -13,7 +13,7 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         if (instance != null)
-            Destroy(instance);
+        Destroy(instance);
         instance = this;
         healthSlider = GetComponent<Slider>();
     }

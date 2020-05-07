@@ -105,7 +105,6 @@ public class RichAI : MonoBehaviour
     }
 
 
-
     void AIFunctionality()
     {
         if ((!target) && (requireTarget))
@@ -505,6 +504,9 @@ public class RichAI : MonoBehaviour
         transform.Translate(-Vector3.forward * 7);
         _stunned = true;
         StartCoroutine(StunRecover());
+        EnemyHealth health = this.GetComponent<EnemyHealth>();
+        health.TakeDamage(10f);
+
     }
 
     public void HomeRun()
@@ -514,6 +516,8 @@ public class RichAI : MonoBehaviour
         transform.Translate(-Vector3.forward * 10);
         _stunned = true;
         StartCoroutine(StunRecover());
+        EnemyHealth health = this.GetComponent<EnemyHealth>();
+        health.TakeDamage(70f);
     }
 
     IEnumerator StunRecover()

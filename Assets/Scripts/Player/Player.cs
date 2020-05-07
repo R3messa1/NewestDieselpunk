@@ -62,10 +62,7 @@ public class Player : MonoBehaviour
     private float _healRate = 10f;
     [SerializeField]
     private float _healFuelCost = 10f;
-    [SerializeField]
-    private GameObject _muzzleFlashPrefabLeft;
-    [SerializeField]
-    private GameObject _muzzleFlashPrefabRight;
+    
     [SerializeField]
     private GameObject _slamDirtPrefab;
     [SerializeField]
@@ -78,6 +75,7 @@ public class Player : MonoBehaviour
     private GameObject _MeleeWeapon;
     //incredibly poor solution for making tab a toggle
     private bool _weaponSwitched;
+    private int _ammo;
 
     //Smashstuff :3
     [SerializeField]
@@ -101,8 +99,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         _animator = this.GetComponent<Animator>();
-        _muzzleFlashPrefabLeft.SetActive(false);
-        _muzzleFlashPrefabRight.SetActive(false);
+        
 
         _MeleeWeapon.SetActive(true);
         _guns.SetActive(false);
@@ -119,7 +116,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("CURRENT FUEL: " + _fuelTank + " ANd health = " + _health);
+        Debug.Log("CURRENT FUEL: " + _fuelTank + " ANd health = " + _health + " AMMO = " + _ammo);
         //FuelUI.instance.UpdateFuel((int)_fuelTank, (int)_maxFuel);
         //shoot
        
@@ -137,11 +134,11 @@ public class Player : MonoBehaviour
         }
         
         
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && _ammo > 0)
             {
                if (_weaponSwitched == true)
                 { 
-                _muzzleFlashPrefabLeft.SetActive(true);
+                
 
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting2", isShootingPressed);
@@ -153,28 +150,26 @@ public class Player : MonoBehaviour
             }
             else
             {
-                _muzzleFlashPrefabLeft.SetActive(false);
-                
                 bool isShootingPressed = false;
                 _animator.SetBool("isshooting2", isShootingPressed);
             }
 
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(1) && _ammo > 0)
             {
-                _muzzleFlashPrefabRight.SetActive(true);
+                
 
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting", isShootingPressed);
             }
             else
             {
-                _muzzleFlashPrefabRight.SetActive(false);
+                
                 bool isShootingPressed = false;
                 _animator.SetBool("isshooting", isShootingPressed);
             }
+
+
         
-
-
         CalculateMovement();
         FuelCheck();
 
@@ -212,7 +207,13 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene(3);
         }
 
+
   
+    }
+
+    public void AmmoQuery(int ammo)
+    {
+        _ammo = ammo;
     }
 
     void SlamAttack()

@@ -8,13 +8,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] float range = 100f;
     [SerializeField] int damage = 25;
     [SerializeField] LayerMask ignoreLayer;
-    [SerializeField] public GameObject Muzzle;
+    
     public Animator _animator;
 
     [SerializeField]
     private GameObject _muzzleFlashPrefabLeft;
-    [SerializeField]
-    private GameObject _muzzleFlashPrefabRight;
 
     [SerializeField]
     private int _maxAmmo = 100;
@@ -24,11 +22,13 @@ public class Weapon : MonoBehaviour
     private bool _canFire = true;
     [SerializeField]
     private float _timeBetweenShots = 0.1f;
+    private Player player;
 
     private void Start()
     {
-        Muzzle.SetActive(false);
+        _muzzleFlashPrefabLeft.SetActive(false);
         _animator = this.GetComponent<Animator>();
+        Player player = GameObject.Find("Player").GetComponent<Player>();
         _ammo = _startingAmmo;
     }
 
@@ -46,14 +46,19 @@ public class Weapon : MonoBehaviour
             _muzzleFlashPrefabRight.SetActive(false);
         }*/
         Debug.Log("ammo: " + _ammo);
+
+        player.AmmoQuery(_ammo);
+
     }
 
     IEnumerator FireRate()
     {
         _canFire = false;
+        _muzzleFlashPrefabLeft.SetActive(true);
         Shoot();
         yield return new WaitForSeconds(_timeBetweenShots);
         _canFire = true;
+        _muzzleFlashPrefabLeft.SetActive(false);
     }
 
     void sound()
@@ -61,7 +66,6 @@ public class Weapon : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             SoundManager.sndMan.PlayGunSound();
-
         }
 
        if (Input.GetButtonDown("Fire1"))
@@ -73,8 +77,7 @@ public class Weapon : MonoBehaviour
 
 private void Shoot()
     {
-        
-
+        _muzzleFlashPrefabLeft.SetActive(true);
         //sound();
 
         RaycastHit hit;

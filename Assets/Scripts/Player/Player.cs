@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
         //FuelUI.instance.UpdateFuel((int)_fuelTank, (int)_maxFuel);
         //shoot
        
-            if (Input.GetKeyDown(KeyCode.Tab) && _weaponSwitched)
+        if (Input.GetKeyDown(KeyCode.Tab) && _weaponSwitched)
         {
             _guns.SetActive(false);
             _MeleeWeapon.SetActive(true);
@@ -126,20 +126,19 @@ public class Player : MonoBehaviour
             _guns.SetActive(true);
             _weaponSwitched = true;
         }
+        
+        
             if (Input.GetMouseButton(0))
             {
-
                 _muzzleFlashPrefabLeft.SetActive(true);
 
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting2", isShootingPressed);
-
-                _animator.SetTrigger("swing");
-
-        }
+            }
             else
             {
                 _muzzleFlashPrefabLeft.SetActive(false);
+                
                 bool isShootingPressed = false;
                 _animator.SetBool("isshooting2", isShootingPressed);
             }
@@ -150,8 +149,6 @@ public class Player : MonoBehaviour
 
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting", isShootingPressed);
-
-
             }
             else
             {
@@ -160,9 +157,9 @@ public class Player : MonoBehaviour
                 _animator.SetBool("isshooting", isShootingPressed);
             }
         
-     
 
-        CalculateMovement();
+
+            CalculateMovement();
         FuelCheck();
 
         if (Input.GetKey(KeyCode.Q) && _fuelAvailable && _health < _maxHealth)

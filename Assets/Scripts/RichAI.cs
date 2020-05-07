@@ -58,11 +58,8 @@ public class RichAI : MonoBehaviour
     private bool smoothAttackRangeBuffer = false; //for runAway AI to not be so messed up by their visual radius and attack range.
     private Player _player;
     private Animator _anim;
-    [SerializeField]
-    private GameObject _projectilePrefab;
 
     //---Starting/Initializing functions---//
-
     void Start()
     {
         _anim = this.GetComponent<Animator>();
@@ -148,10 +145,12 @@ public class RichAI : MonoBehaviour
 
                 if (runAway)
                 {
+                    _anim.SetTrigger("Walk");
                     WalkNewPath();
                 }
                 else
                 {
+                    _anim.SetTrigger("Walk");
                     MoveTowards(moveToward);
                 }
             }
@@ -171,10 +170,12 @@ public class RichAI : MonoBehaviour
 
                 if (runAway)
                 {
+                    _anim.SetTrigger("Walk");
                     MoveTowards(moveAway); //move away
                 }
                 else
                 {
+                    _anim.SetTrigger("Walk");
                     MoveTowards(moveToward); //move toward
                 }
             }
@@ -183,10 +184,12 @@ public class RichAI : MonoBehaviour
                 //continue to run!
                 if (runAway)
                 {
+                    _anim.SetTrigger("Walk");
                     MoveTowards(moveAway); //move away
                 }
                 else
                 {
+                    _anim.SetTrigger("Walk");
                     MoveTowards(moveToward); //move toward
                 }
             }
@@ -241,7 +244,6 @@ public class RichAI : MonoBehaviour
             while (enemyCanAttack)
             {
                 lastShotFired = Time.time;
-                Instantiate(_projectilePrefab, localPos, localDir);
                 yield return new WaitForSeconds(attackTime);
             }
         }
@@ -321,7 +323,7 @@ public class RichAI : MonoBehaviour
             //check to see if we should give up our search
             if (Time.time > lostPlayerTimer)
             {
-                _anim.SetTrigger("idle");
+                //_anim.SetTrigger("idle");
                 targetIsOutOfSight = false;
                 playerHasBeenSeen = false;
                 break;
@@ -479,11 +481,13 @@ public class RichAI : MonoBehaviour
         }
         characterController.Move(direction * Time.deltaTime);
         
+
     }
 
     public void Pounded()
     {
         transform.Translate(Vector3.up * 5);
+        _anim.SetTrigger("Stun");
     }
 
     //continuous gravity checks

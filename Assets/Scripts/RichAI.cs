@@ -481,6 +481,11 @@ public class RichAI : MonoBehaviour
         
     }
 
+    public void Pounded()
+    {
+        transform.Translate(Vector3.up * 5);
+    }
+
     //continuous gravity checks
     void MonitorGravity()
     {

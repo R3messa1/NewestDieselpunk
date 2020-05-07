@@ -91,6 +91,7 @@ public class RichAI : MonoBehaviour
         {
             AIFunctionality();
         }
+        Offense();
     }
 
 
@@ -145,12 +146,10 @@ public class RichAI : MonoBehaviour
 
                 if (runAway)
                 {
-                    _anim.SetTrigger("Walk");
                     WalkNewPath();
                 }
                 else
                 {
-                    _anim.SetTrigger("Walk");
                     MoveTowards(moveToward);
                 }
             }
@@ -170,12 +169,10 @@ public class RichAI : MonoBehaviour
 
                 if (runAway)
                 {
-                    _anim.SetTrigger("Walk");
                     MoveTowards(moveAway); //move away
                 }
                 else
                 {
-                    _anim.SetTrigger("Walk");
                     MoveTowards(moveToward); //move toward
                 }
             }
@@ -184,12 +181,10 @@ public class RichAI : MonoBehaviour
                 //continue to run!
                 if (runAway)
                 {
-                    _anim.SetTrigger("Walk");
                     MoveTowards(moveAway); //move away
                 }
                 else
                 {
-                    _anim.SetTrigger("Walk");
                     MoveTowards(moveToward); //move toward
                 }
             }
@@ -231,6 +226,10 @@ public class RichAI : MonoBehaviour
         }
     }
 
+    void Offense()
+    {
+        _anim.SetTrigger("lyonti");
+    }
 
     IEnumerator Attack()
     {

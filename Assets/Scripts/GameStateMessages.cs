@@ -23,7 +23,7 @@ public class GameStateMessages : MonoBehaviour
     public void ShowWave1Msg()
     {
         wave1Msg.SetActive(true);
-        Invoke("DisableWave1", 2);
+        Invoke("DisableWave1", 5);
     }
 
     void DisableWave1()
@@ -34,7 +34,7 @@ public class GameStateMessages : MonoBehaviour
     public void ShowWave2Msg()
     {
         wave2Msg.SetActive(true);
-        Invoke("DisableWave2", 2);
+        Invoke("DisableWave2", 5);
     }
 
     void DisableWave2()
@@ -45,7 +45,7 @@ public class GameStateMessages : MonoBehaviour
     public void ShowLasDestroyedMsg()
     {
         lastPoleDstrydMsg.SetActive(true);
-        Invoke("DisableLstDstryd", 2);
+        Invoke("DisableLstDstryd", 5);
     }
 
     void DisableLstDstryd()
@@ -56,7 +56,7 @@ public class GameStateMessages : MonoBehaviour
     public void ShowWave3Msg()
     {
         wave2Msg.SetActive(true);
-        Invoke("DisableWave3", 2);
+        Invoke("DisableWave3", 5);
     }
 
     void DisableWave3()
@@ -70,11 +70,11 @@ public class GameStateMessages : MonoBehaviour
         {
             LevelCompleteMsg.SetActive(true);
             hasInvoked = true;
-            Invoke("LoadMainMenu", 1);
+            Invoke("LoadMainMenu", 5);
         }
     }
 
-    public void ShowLevelFailed()
+   /* public void ShowLevelFailed()
     {
         if (!hasInvoked)
         {
@@ -82,7 +82,7 @@ public class GameStateMessages : MonoBehaviour
             hasInvoked = true;
             Invoke("LoadMainMenu", 1);
         }
-    }
+    }*/
 
     public void LoadMainMenu()
     {

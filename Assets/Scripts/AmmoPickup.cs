@@ -20,13 +20,15 @@ public class AmmoPickup : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            Weapon weapon = other.GetComponent<Weapon>();
-            weapon.AddAmmo();
+            Player player = GameObject.Find("Player").GetComponent<Player>();
+            player.AddAmmo();
             if (this.transform.parent != null)
             {
                 Destroy(this.transform.parent.gameObject);
             }
             Destroy(this.gameObject);
         }
+
+        
     }
 }

@@ -181,6 +181,12 @@ public class Player : MonoBehaviour
         _ammo = ammo;
     }
 
+    public void AddAmmo()
+    {
+        Weapon weapon = this.GetComponentInChildren<Weapon>();
+        weapon.AddAmmo();
+    }
+
     void SlamAttack()
     {
 

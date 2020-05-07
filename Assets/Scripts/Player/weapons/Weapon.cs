@@ -46,7 +46,7 @@ private void Shoot()
     {
 
 
-        sound();
+        //sound();
 
         RaycastHit hit;
         if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range, ignoreLayer))

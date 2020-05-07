@@ -113,13 +113,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("CURRENT FUEL: " + _fuelTank + " ANd health = " + _health + " AMMO = " + _ammo);
+        Debug.Log("CURRENT FUEL: " + _fuelTank + " ANd health = " + _health);
         //FuelUI.instance.UpdateFuel((int)_fuelTank, (int)_maxFuel);
         //shoot
        
         
         
-            if (Input.GetMouseButton(0) && _ammo > 0)
+            if (Input.GetMouseButton(0))
             {                           
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting", isShootingPressed);                              

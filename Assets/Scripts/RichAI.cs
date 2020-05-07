@@ -58,6 +58,9 @@ public class RichAI : MonoBehaviour
     private bool smoothAttackRangeBuffer = false; //for runAway AI to not be so messed up by their visual radius and attack range.
     private Player _player;
     private Animator _anim;
+    private bool _stunned = false;
+    [SerializeField]
+    private float _stunLenght = 1f;
 
     //---Starting/Initializing functions---//
     void Start()
@@ -229,6 +232,7 @@ public class RichAI : MonoBehaviour
     void Offense()
     {
         _anim.SetTrigger("lyonti");
+        
     }
 
     IEnumerator Attack()
@@ -445,43 +449,44 @@ public class RichAI : MonoBehaviour
 
     void MoveTowards(Vector3 direction)
     {
-        bool iswalking = true;
-        _anim.SetBool("iswalking", iswalking);
-        direction.y = 0;
-        int speed = walkSpeed;
-        
-        if (walkInRandomDirection)
+        if (!_stunned)
         {
-            speed = randomSpeed;
+            bool iswalking = true;
+            _anim.SetBool("iswalking", iswalking);
+            direction.y = 0;
+            int speed = walkSpeed;
+
+            if (walkInRandomDirection)
+            {
+                speed = randomSpeed;
+            }
+
+            if (executeBufferState)
+            {
+                speed = runSpeed;
+            }
+
+
+            //rotate toward or away from the target
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+
+
+            //slow down when we are not facing the target
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            float speedModifier = Vector3.Dot(forward, direction.normalized);
+            speedModifier = Mathf.Clamp01(speedModifier);
+
+
+            //actually move toward or away from the target
+            direction = forward * speed * speedModifier;
+
+            if ((!canFly) && (floatHeight <= 0.0f))
+            {
+                direction.y -= gravity;
+            }
+            characterController.Move(direction * Time.deltaTime);
         }
-
-        if (executeBufferState)
-        {
-            speed = runSpeed;
-        }
-
-
-        //rotate toward or away from the target
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-
-
-        //slow down when we are not facing the target
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        float speedModifier = Vector3.Dot(forward, direction.normalized);
-        speedModifier = Mathf.Clamp01(speedModifier);
-
-
-        //actually move toward or away from the target
-        direction = forward * speed * speedModifier;
-
-        if ((!canFly) && (floatHeight <= 0.0f))
-        {
-            direction.y -= gravity;
-        }
-        characterController.Move(direction * Time.deltaTime);
-        
-
     }
 
     public void Pounded()
@@ -489,7 +494,16 @@ public class RichAI : MonoBehaviour
         _anim.SetTrigger("Stun");
         transform.Translate(Vector3.up * 7);
         transform.Translate(-Vector3.forward * 7);
+        _stunned = true;
+        StartCoroutine(StunRecover());
     }
+
+    IEnumerator StunRecover()
+    {
+        yield return new WaitForSeconds(_stunLenght);
+        _stunned = false;
+    }
+
 
     //continuous gravity checks
     void MonitorGravity()

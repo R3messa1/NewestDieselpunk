@@ -14,13 +14,16 @@ public class Poll : MonoBehaviour
         canBeDestroyed = true;
         ChangeLight(PollHandler.instance.greenLight);
     }
-    
+
     public void destroyPoll()
     {
         ChangeLight(PollHandler.instance.blackLight);
 
         if (isLast)
+        {
+            GameStateMessages.instance.ShowLasDestroyedMsg();
             Portal.instance.OpenPOrtal();
+        }
     }
 
     public void ChangeLight(Material material)
@@ -30,6 +33,9 @@ public class Poll : MonoBehaviour
 
     public void Hit()
     {
+        if (!canBeDestroyed)
+            return;
+
         NumOfHitsRequired--;
         if (NumOfHitsRequired <= 0)
             destroyPoll();

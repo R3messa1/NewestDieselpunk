@@ -15,4 +15,18 @@ public class AmmoPickup : MonoBehaviour
     {
         
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            Weapon weapon = other.GetComponent<Weapon>();
+            weapon.AddAmmo();
+            if (this.transform.parent != null)
+            {
+                Destroy(this.transform.parent.gameObject);
+            }
+            Destroy(this.gameObject);
+        }
+    }
 }

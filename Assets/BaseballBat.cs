@@ -27,7 +27,7 @@ public class BaseballBat : MonoBehaviour
 
             rAI.HomeRun();
 
-            Instantiate(_impactPrefab, transform.position, transform.rotation);
+            Instantiate(_impactPrefab, transform.position, Camera.main.transform.rotation);
         }
     }
 }

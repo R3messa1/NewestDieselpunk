@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
                 _animator.SetBool("isshooting", isShootingPressed);
             }
 
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButtonDown(1))
             {
                 _animator.SetTrigger("swing");
             }

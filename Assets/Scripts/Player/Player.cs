@@ -206,12 +206,10 @@ public class Player : MonoBehaviour
 
         foreach (Collider nearbyObject in colliders)
         {
-            Rigidbody rB = nearbyObject.GetComponent<Rigidbody>();
-            if (rB != null)
+            RichAI rAI = nearbyObject.GetComponent<RichAI>();
+            if (rAI != null)
             {
-                rB.AddForce(Camera.main.transform.forward * 7);
-
-                _controller.transform.position = transform.position;
+                rAI.Pounded();
             }
         }
 

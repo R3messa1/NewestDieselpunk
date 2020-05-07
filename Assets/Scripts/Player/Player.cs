@@ -101,9 +101,6 @@ public class Player : MonoBehaviour
         _animator = this.GetComponent<Animator>();
         
 
-        _MeleeWeapon.SetActive(true);
-        _guns.SetActive(false);
-
         _health = _maxHealth;
         _fuelTank = _maxFuel;
 
@@ -120,53 +117,24 @@ public class Player : MonoBehaviour
         //FuelUI.instance.UpdateFuel((int)_fuelTank, (int)_maxFuel);
         //shoot
        
-        if (Input.GetKeyDown(KeyCode.Tab) && _weaponSwitched)
-        {
-            _guns.SetActive(false);
-            _MeleeWeapon.SetActive(true);
-            _weaponSwitched = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.Tab) && !_weaponSwitched)
-        {
-            _MeleeWeapon.SetActive(false);
-            _guns.SetActive(true);
-            _weaponSwitched = true;
-        }
         
         
             if (Input.GetMouseButton(0) && _ammo > 0)
-            {
-               if (_weaponSwitched == true)
-                { 
-                
-
+            {                           
                 bool isShootingPressed = true;
-                _animator.SetBool("isshooting2", isShootingPressed);
-                }
-                else 
-                {
+                _animator.SetBool("isshooting", isShootingPressed);                              
+            }
+            else
+            {
+                bool isShootingPressed = false;
+                _animator.SetBool("isshooting", isShootingPressed);
+            }
+
+            if (Input.GetMouseButton(1))
+            {
                 _animator.SetTrigger("swing");
-                }
             }
-            else
-            {
-                bool isShootingPressed = false;
-                _animator.SetBool("isshooting2", isShootingPressed);
-            }
-
-            if (Input.GetMouseButton(1) && _ammo > 0)
-            {
-                
-
-                bool isShootingPressed = true;
-                _animator.SetBool("isshooting", isShootingPressed);
-            }
-            else
-            {
-                
-                bool isShootingPressed = false;
-                _animator.SetBool("isshooting", isShootingPressed);
-            }
+          
 
 
         
@@ -206,9 +174,6 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
             SceneManager.LoadScene(3);
         }
-
-
-  
     }
 
     public void AmmoQuery(int ammo)

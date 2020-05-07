@@ -8,11 +8,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] float range = 100f;
     [SerializeField] int damage = 25;
     [SerializeField] LayerMask ignoreLayer;
-    
+    [SerializeField] public GameObject Muzzle;
     public Animator _animator;
 
     [SerializeField]
     private GameObject _muzzleFlashPrefabLeft;
+    [SerializeField]
+    private GameObject _muzzleFlashPrefabRight;
 
     [SerializeField]
     private int _maxAmmo = 100;
@@ -22,23 +24,22 @@ public class Weapon : MonoBehaviour
     private bool _canFire = true;
     [SerializeField]
     private float _timeBetweenShots = 0.1f;
-    private Player player;
 
     private void Start()
     {
-        _muzzleFlashPrefabLeft.SetActive(false);
+        Muzzle.SetActive(false);
         _animator = this.GetComponent<Animator>();
-        Player player = GameObject.Find("Player").GetComponent<Player>();
         _ammo = _startingAmmo;
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetButton("Fire1") && _ammo > 0 && _canFire)
+       if (Input.GetMouseButton(0) && _ammo > 0 && _canFire)
        { 
             _ammo -= 1;
             StartCoroutine(FireRate());
+
        }
        /*else if(Input.GetButtonUp("Fire1") || _ammo <= 0)
         {
@@ -46,19 +47,14 @@ public class Weapon : MonoBehaviour
             _muzzleFlashPrefabRight.SetActive(false);
         }*/
         Debug.Log("ammo: " + _ammo);
-
-        player.AmmoQuery(_ammo);
-
     }
 
     IEnumerator FireRate()
     {
         _canFire = false;
-        _muzzleFlashPrefabLeft.SetActive(true);
         Shoot();
         yield return new WaitForSeconds(_timeBetweenShots);
         _canFire = true;
-        _muzzleFlashPrefabLeft.SetActive(false);
     }
 
     void sound()
@@ -66,6 +62,7 @@ public class Weapon : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             SoundManager.sndMan.PlayGunSound();
+
         }
 
        if (Input.GetButtonDown("Fire1"))
@@ -77,7 +74,8 @@ public class Weapon : MonoBehaviour
 
 private void Shoot()
     {
-        _muzzleFlashPrefabLeft.SetActive(true);
+        
+
         //sound();
 
         RaycastHit hit;

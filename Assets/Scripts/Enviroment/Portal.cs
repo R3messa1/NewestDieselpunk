@@ -7,7 +7,6 @@ public class Portal : MonoBehaviour
     public static Portal instance;
     public Material openMat;
     bool isOpen = false;
-    public GameObject CongratsMsg;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +26,10 @@ public class Portal : MonoBehaviour
     {
         if (isOpen)
         {
-            CongratsMsg.SetActive(true);
+            GameStateMessages.instance.ShowLevelComplete();
         }
-                //finishGame
+        //finishGame
     }
 
 }
+

@@ -8,15 +8,15 @@ public class PollHandler : MonoBehaviour
     public Poll[] polelight;
     public Material greenLight, blackLight;
     int waveNumber;
-    
+
     private void Start()
     {
         if (instance != null)
             Destroy(instance);
 
-         instance = this;
+        instance = this;
     }
-    
+
 
     public void WaveFinished()
     {

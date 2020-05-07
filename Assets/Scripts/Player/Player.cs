@@ -113,38 +113,62 @@ public class Player : MonoBehaviour
         Debug.Log("CURRENT FUEL: " + _fuelTank + " ANd health = " + _health);
         //FuelUI.instance.UpdateFuel((int)_fuelTank, (int)_maxFuel);
         //shoot
-        if (Input.GetMouseButton(0))
+       
+            if (Input.GetKeyDown(KeyCode.Tab) && _weaponSwitched)
         {
-          
-            _muzzleFlashPrefabLeft.SetActive(true);
-          
-            bool isShootingPressed = true;
-            _animator.SetBool("isshooting2", isShootingPressed);
-           
+            _guns.SetActive(false);
+            _MeleeWeapon.SetActive(true);
+            _weaponSwitched = false;
         }
-        else
+        else if (Input.GetKeyDown(KeyCode.Tab) && !_weaponSwitched)
         {
-            _muzzleFlashPrefabLeft.SetActive(false);
-            bool isShootingPressed = false;
-            _animator.SetBool("isshooting2", isShootingPressed);
+            _MeleeWeapon.SetActive(false);
+            _guns.SetActive(true);
+            _weaponSwitched = true;
         }
+            if (Input.GetMouseButton(0))
+            {
 
-        if (Input.GetMouseButton(1))
+                _muzzleFlashPrefabLeft.SetActive(true);
+
+                bool isShootingPressed = true;
+                _animator.SetBool("isshooting2", isShootingPressed);
+
+            }
+            else
+            {
+                _muzzleFlashPrefabLeft.SetActive(false);
+                bool isShootingPressed = false;
+                _animator.SetBool("isshooting2", isShootingPressed);
+            }
+
+            if (Input.GetMouseButton(1))
+            {
+                _muzzleFlashPrefabRight.SetActive(true);
+
+                bool isShootingPressed = true;
+                _animator.SetBool("isshooting", isShootingPressed);
+
+
+            }
+            else
+            {
+                _muzzleFlashPrefabRight.SetActive(false);
+                bool isShootingPressed = false;
+                _animator.SetBool("isshooting", isShootingPressed);
+            }
+        
+        if (_weaponSwitched = false)
         {
-            _muzzleFlashPrefabRight.SetActive(true);
+            if (Input.GetMouseButtonDown(0))
+            {
+                _animator.SetTrigger("swing");
+            }
+            else
+            {
 
-            bool isShootingPressed = true;
-            _animator.SetBool("isshooting", isShootingPressed);
-
-
+            }
         }
-        else
-        {
-            _muzzleFlashPrefabRight.SetActive(false);
-            bool isShootingPressed = false;
-            _animator.SetBool("isshooting", isShootingPressed);
-        }
-
 
         CalculateMovement();
         FuelCheck();
@@ -182,18 +206,7 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab) && _weaponSwitched)
-        {
-            _guns.SetActive(false);
-            _MeleeWeapon.SetActive(true);
-            _weaponSwitched = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.Tab) && !_weaponSwitched)
-        {
-            _MeleeWeapon.SetActive(false);
-            _guns.SetActive(true);
-            _weaponSwitched = true;
-        }
+  
     }
 
     void SlamAttack()

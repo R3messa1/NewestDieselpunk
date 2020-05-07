@@ -154,10 +154,8 @@ public class Player : MonoBehaviour
                 _animator.SetBool("isshooting2", isShootingPressed);
             }
 
-            if (Input.GetMouseButton(1) && _ammo > 0)
+            if (Input.GetMouseButton(1))
             {
-                
-
                 bool isShootingPressed = true;
                 _animator.SetBool("isshooting", isShootingPressed);
             }
@@ -206,9 +204,6 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
             SceneManager.LoadScene(3);
         }
-
-
-  
     }
 
     public void AmmoQuery(int ammo)

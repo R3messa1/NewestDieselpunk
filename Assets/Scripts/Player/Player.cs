@@ -176,7 +176,9 @@ public class Player : MonoBehaviour
     public void AddAmmo()
     {
         Weapon weapon = this.GetComponentInChildren<Weapon>();
+        Weapon2 weapon2 = this.GetComponentInChildren<Weapon2>();
         weapon.AddAmmo();
+        weapon2.AddAmmo();
     }
 
     void SlamAttack()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon2 : MonoBehaviour
 {
     [SerializeField] Camera FPCamera;
     [SerializeField] float range = 100f;
@@ -33,23 +33,23 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetMouseButton(0) && _ammo > 0 && _canFire)
-       { 
+        if (Input.GetMouseButton(0) && _ammo > 0 && _canFire)
+        {
             _ammo -= 1;
             StartCoroutine(FireRate());
 
-       }
-       /*else if(Input.GetButtonUp("Fire1") || _ammo <= 0)
-        {
-            _muzzleFlashPrefabLeft.SetActive(false);
-            _muzzleFlashPrefabRight.SetActive(false);
-        }*/
+        }
+        /*else if(Input.GetButtonUp("Fire1") || _ammo <= 0)
+         {
+             _muzzleFlashPrefabLeft.SetActive(false);
+             _muzzleFlashPrefabRight.SetActive(false);
+         }*/
         Debug.Log("ammo: " + _ammo);
     }
 
     IEnumerator FireRate()
     {
-        sound();
+        
         _canFire = false;
         Shoot();
         yield return new WaitForSeconds(_timeBetweenShots);
@@ -62,7 +62,7 @@ public class Weapon : MonoBehaviour
         SoundManager.sndMan.PlayGunSound();
     }
 
-private void Shoot()
+    private void Shoot()
     {
         _muzzleFlashPrefabLeft.SetActive(true);
 

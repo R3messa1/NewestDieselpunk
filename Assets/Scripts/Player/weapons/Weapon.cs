@@ -21,11 +21,12 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private int _startingAmmo = 20;
     private int _ammo;
+    private bool _canFire = true;
+    [SerializeField]
+    private float _timeBetweenShots = 0.1f;
 
     private void Start()
     {
-        _muzzleFlashPrefabLeft.SetActive(false);
-        _muzzleFlashPrefabRight.SetActive(false);
         Muzzle.SetActive(false);
         _animator = this.GetComponent<Animator>();
         _ammo = _startingAmmo;
@@ -34,19 +35,25 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetButton("Fire1") && _ammo > 0)
-        {
-            _muzzleFlashPrefabLeft.SetActive(true);
-            _muzzleFlashPrefabRight.SetActive(true);
+       if (Input.GetButton("Fire1") && _ammo > 0 && _canFire)
+       { 
             _ammo -= 1;
-            Shoot();
-        }
-       else if(Input.GetButtonUp("Fire1") || _ammo <= 0)
+            StartCoroutine(FireRate());
+       }
+       /*else if(Input.GetButtonUp("Fire1") || _ammo <= 0)
         {
             _muzzleFlashPrefabLeft.SetActive(false);
             _muzzleFlashPrefabRight.SetActive(false);
-        }
+        }*/
         Debug.Log("ammo: " + _ammo);
+    }
+
+    IEnumerator FireRate()
+    {
+        _canFire = false;
+        Shoot();
+        yield return new WaitForSeconds(_timeBetweenShots);
+        _canFire = true;
     }
 
     void sound()

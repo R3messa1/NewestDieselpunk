@@ -191,9 +191,8 @@ public class Player : MonoBehaviour
 
     void SlamAttack()
     {
-
-        Instantiate(_slamDirtPrefab, transform.position, _slamDirtPrefab.transform.rotation);
-        Destroy(_slamDirtPrefab.gameObject, 2.5f);
+        var cloneDirt = Instantiate(_slamDirtPrefab, transform.position, _slamDirtPrefab.transform.rotation);
+        Destroy(cloneDirt, 2.5f);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _slamRadius);
 

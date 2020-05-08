@@ -27,7 +27,14 @@ public class BaseballBat : MonoBehaviour
 
             rAI.HomeRun();
 
+            sound();
+
             Instantiate(_impactPrefab, transform.position, Camera.main.transform.rotation);
         }
+    }
+
+    void sound()
+    {
+        SoundManager.sndMan.PlayHitSound();
     }
 }

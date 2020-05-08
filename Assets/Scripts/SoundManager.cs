@@ -9,9 +9,11 @@ public class SoundManager : MonoBehaviour
     private AudioSource audioSrc;
     private AudioClip[] GunSound;
     private AudioClip[] WooshSound;
+    private AudioClip[] SmackSound;
 
     private int randomGunSound;
     private int randomWooshSound;
+    private int randomBatSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,7 @@ public class SoundManager : MonoBehaviour
         audioSrc = GetComponent<AudioSource>();
         GunSound = Resources.LoadAll<AudioClip>("GunSound");
         WooshSound = Resources.LoadAll<AudioClip>("WooshSound");
+        SmackSound = Resources.LoadAll<AudioClip>("BaseballHitSound");
 
     }
 
@@ -41,5 +44,13 @@ public class SoundManager : MonoBehaviour
         audioSrc.clip = WooshSound[Random.Range(0, WooshSound.Length)];
         audioSrc.Play();
 
+    }
+
+    public void PlayHitSound()
+    {
+        randomBatSound = Random.Range(0, 1);
+        audioSrc.PlayOneShot(SmackSound[randomBatSound]);
+        audioSrc.clip = SmackSound[Random.Range(0, SmackSound.Length)];
+        audioSrc.Play();
     }
 }

@@ -372,8 +372,6 @@ public class Player : MonoBehaviour
     public void TakeDamage(float amount)
     {
         _health -= amount;
-        damageImage.color = flashColour;
-        _dmgfx.TakeDamage();
     }
 
     public void FuelHeal()

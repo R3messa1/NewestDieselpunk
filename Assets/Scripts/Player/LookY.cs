@@ -6,6 +6,10 @@ public class LookY : MonoBehaviour
 {
     [SerializeField]
     private float _mouseYSensitivity = 1f;
+    [SerializeField]
+    private float maxRotation = 100f;
+    [SerializeField]
+    private float verticalRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +21,7 @@ public class LookY : MonoBehaviour
     void Update()
     {
         float mouseY = Input.GetAxis("Mouse Y");
-
-        Vector3 newRotation = transform.localEulerAngles;
-        newRotation.x += -mouseY * _mouseYSensitivity;
-        transform.localEulerAngles = newRotation;
+        verticalRotation = Mathf.Clamp(verticalRotation + mouseY * _mouseYSensitivity, -maxRotation, maxRotation);
+        transform.localEulerAngles = Vector3.left * verticalRotation;
     }
 }

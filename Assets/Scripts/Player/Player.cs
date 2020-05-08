@@ -74,6 +74,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _MeleeWeapon;
 
+    private HealthBar _healthbar;
+    private FuelBar _fuelBar;
+
     //Smashstuff :3
     [SerializeField]
     private float _slamRadius = 30f;
@@ -96,7 +99,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         _animator = this.GetComponent<Animator>();
-        
+
+        _healthbar = GameObject.Find("SliderHealth").GetComponent<HealthBar>();
+        _fuelBar = GameObject.Find("SliderFuel").GetComponent<FuelBar>();
 
         _health = _maxHealth;
         _fuelTank = _maxFuel;
@@ -113,7 +118,9 @@ public class Player : MonoBehaviour
         Debug.Log("CURRENT FUEL: " + _fuelTank + " ANd health = " + _health);
         //FuelUI.instance.UpdateFuel((int)_fuelTank, (int)_maxFuel);
         //shoot
-       
+
+        UpdateHealthBar();
+        UpdateFuelBar();
         
         
             if (Input.GetMouseButton(0))
@@ -372,6 +379,16 @@ public class Player : MonoBehaviour
     public void TakeDamage(float amount)
     {
         _health -= amount;
+    }
+
+    void UpdateHealthBar()
+    {
+        _healthbar.SetValue(_health);
+    }
+
+    void UpdateFuelBar()
+    {
+        _fuelBar.SetValue(_fuelTank);
     }
 
     public void FuelHeal()

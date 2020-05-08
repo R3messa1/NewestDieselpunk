@@ -105,6 +105,8 @@ public class RichAI : MonoBehaviour
     {
         runAway = true;
         runTo = false;
+        bool isPussy = true;
+        _anim.SetBool("ispussy", isPussy);
     }
 
 

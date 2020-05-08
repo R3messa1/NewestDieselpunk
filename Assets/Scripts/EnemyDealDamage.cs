@@ -42,7 +42,7 @@ public class EnemyDealDamage : MonoBehaviour
     
     IEnumerator AbleToDeal()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         _hitBox.isTrigger = false;
     }
 }

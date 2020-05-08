@@ -34,11 +34,6 @@ public class EnemyHealth : MonoBehaviour
             Destroy(gameObject);
             Instantiate(_GibPrefab, transform.position, transform.rotation);
             Instantiate(_ammoDrop, transform.position, _ammoDrop.transform.rotation);
-            HUD = GameObject.Find("HUD");
-
-            KillCounter _killcounter = HUD.GetComponent<KillCounter>();
-
-            _killcounter.EnemyKilled();
         }
     }
 }

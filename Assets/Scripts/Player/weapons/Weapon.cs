@@ -23,23 +23,30 @@ public class Weapon : MonoBehaviour
     private bool _canFire = true;
     [SerializeField]
     private float _timeBetweenShots = 0.21f;
+    [SerializeField]
+    private GameObject AmmoHUD;
 
     private void Start()
     {
         _animator = this.GetComponent<Animator>();
         _ammo = _startingAmmo;
+        AmmoHUD = GameObject.Find("AmmoHUD");
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetMouseButton(0) && _ammo > 0 && _canFire)
-       { 
+        AmmoCounter _ammoCounter = AmmoHUD.GetComponent<AmmoCounter>();
+
+        _ammoCounter.UpdateAmmo1(_ammo);
+
+        if (Input.GetMouseButton(0) && _ammo > 0 && _canFire)
+        { 
             _ammo -= 1;
             StartCoroutine(FireRate());
 
-       }
-       /*else if(Input.GetButtonUp("Fire1") || _ammo <= 0)
+        }
+        /*else if(Input.GetButtonUp("Fire1") || _ammo <= 0)
         {
             _muzzleFlashPrefabLeft.SetActive(false);
             _muzzleFlashPrefabRight.SetActive(false);

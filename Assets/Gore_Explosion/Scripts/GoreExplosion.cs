@@ -5,10 +5,10 @@ using UnityEngine;
 public class GoreExplosion : MonoBehaviour
 {
 
-    public GameObject intestinesA;
-    public Transform intestinesARig;
-    public GameObject intestinesB;
-    public Transform intestinesBRig;
+    //public GameObject intestinesA;
+    //public Transform intestinesARig;
+    //public GameObject intestinesB;
+    //public Transform intestinesBRig;
     public GameObject heart;
     public GameObject explodeFX;
     public GameObject man;
@@ -44,11 +44,11 @@ public class GoreExplosion : MonoBehaviour
 
         man.SetActive(false);
         explodeFX.SetActive(true);
-        intestinesA.SetActive(true);
+        //intestinesA.SetActive(true);
 
         // Launch dymanic flesh pieces
-        intestinesARig.GetComponent<Rigidbody>().AddForce(Random.Range(0, 10), Random.Range(25, 50), Random.Range(0, 10), ForceMode.Impulse);
-        intestinesBRig.GetComponent<Rigidbody>().AddForce(Random.Range(0, 10), Random.Range(50, 75), Random.Range(0, 10), ForceMode.Impulse);
+        //intestinesARig.GetComponent<Rigidbody>().AddForce(Random.Range(0, 10), Random.Range(25, 50), Random.Range(0, 10), ForceMode.Impulse);
+        //intestinesBRig.GetComponent<Rigidbody>().AddForce(Random.Range(0, 10), Random.Range(50, 75), Random.Range(0, 10), ForceMode.Impulse);
         heart.GetComponent<Rigidbody>().AddForce(Random.Range(0, 5), Random.Range(10, 20), Random.Range(0, 5), ForceMode.Impulse);
 
         yield return new WaitForSeconds(4.7f);

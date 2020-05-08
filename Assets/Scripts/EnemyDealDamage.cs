@@ -34,7 +34,7 @@ public class EnemyDealDamage : MonoBehaviour
 
             if(player != null)
             {
-                player.TakeDamage(50f);
+                player.TakeDamage(33f);
                 _hitBox.isTrigger = false;
             }
         }

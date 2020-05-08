@@ -19,7 +19,7 @@ public class EnemyHealth : MonoBehaviour
         
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool wasMelee)
     {
         hitPoints -= damage;
 
@@ -33,7 +33,19 @@ public class EnemyHealth : MonoBehaviour
         {
             Destroy(gameObject);
             Instantiate(_GibPrefab, transform.position, transform.rotation);
-            Instantiate(_ammoDrop, transform.position, _ammoDrop.transform.rotation);
+            if(wasMelee == true)
+            {
+                Instantiate(_ammoDrop, transform.position, _ammoDrop.transform.rotation);
+            }
+            else if (!wasMelee)
+            {
+                int maybeDrop = Random.Range(1, 7);
+
+                if(maybeDrop == 2)
+                {
+                    Instantiate(_ammoDrop, transform.position, _ammoDrop.transform.rotation);
+                }
+            }
             HUD = GameObject.Find("HUD");
 
             KillCounter _killcounter = HUD.GetComponent<KillCounter>();

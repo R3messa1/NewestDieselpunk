@@ -87,7 +87,7 @@ public class Weapon2 : MonoBehaviour
             if (target == null) return;
             // call a method on EnemyHealth that decreases the enemy's health
             Debug.Log("Damaging this soB");
-            target.TakeDamage(damage);
+            target.TakeDamage(damage, false);
         }
         else
         {

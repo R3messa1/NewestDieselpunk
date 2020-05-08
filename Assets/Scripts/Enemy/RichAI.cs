@@ -511,7 +511,7 @@ public class RichAI : MonoBehaviour
         _stunned = true;
         StartCoroutine(StunRecover());
         EnemyHealth health = this.GetComponent<EnemyHealth>();
-        health.TakeDamage(10f);
+        health.TakeDamage(10f, false);
 
     }
 
@@ -523,7 +523,7 @@ public class RichAI : MonoBehaviour
         _stunned = true;
         StartCoroutine(StunRecover());
         EnemyHealth health = this.GetComponent<EnemyHealth>();
-        health.TakeDamage(70f);
+        health.TakeDamage(70f, true);
     }
 
     IEnumerator StunRecover()

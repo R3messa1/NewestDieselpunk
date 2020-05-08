@@ -30,6 +30,8 @@ public class RichAI : MonoBehaviour
     public float estRayTimer = 1.0f; //The amount of time in seconds between raycasts for gravity and elevation checks.
     public bool requireTarget = true; //Waypoint ONLY functionality (still can fly and hover).
     public Transform target; //The target, or whatever the AI is looking for.
+    
+    private EnemyDealDamage _hand;
 
     //private script handled variables
     private bool initialGo = false; //AI cannot function until it is initialized.
@@ -66,6 +68,7 @@ public class RichAI : MonoBehaviour
     void Start()
     {
         _anim = this.GetComponent<Animator>();
+        _hand = this.GetComponentInChildren<EnemyDealDamage>();
         //_player = GameObject.Find("Player").GetComponent<Player>();
 
         target = GameObject.Find("Player").transform;
@@ -237,12 +240,13 @@ public class RichAI : MonoBehaviour
 
     void Offense()
     {
+        _hand.HitBoxActive();
         _anim.SetTrigger("lyonti");
-        
     }
 
     IEnumerator Attack()
     {
+        
         Quaternion localDir = transform.localRotation;
         Vector3 localPos = transform.localPosition;
 

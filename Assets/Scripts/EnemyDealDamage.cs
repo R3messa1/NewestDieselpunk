@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class EnemyDealDamage : MonoBehaviour
 {
+    [SerializeField]
     private Collider _hitBox;
 
     // Start is called before the first frame update
     void Start()
     {
         _hitBox = this.GetComponent<CapsuleCollider>();
-        _hitBox.isTrigger = true;
+        _hitBox.isTrigger = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void HitBoxActive()
+    {
+        _hitBox.isTrigger = true;
+        StartCoroutine(AbleToDeal());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,14 +36,13 @@ public class EnemyDealDamage : MonoBehaviour
             {
                 player.TakeDamage(50f);
                 _hitBox.isTrigger = false;
-                StartCoroutine(AbleToDeal());
             }
         }
     }
     
     IEnumerator AbleToDeal()
     {
-        yield return new WaitForSeconds(3);
-        _hitBox.isTrigger = true;
+        yield return new WaitForSeconds(1);
+        _hitBox.isTrigger = false;
     }
 }

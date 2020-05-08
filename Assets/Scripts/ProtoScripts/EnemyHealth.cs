@@ -9,14 +9,13 @@ public class EnemyHealth : MonoBehaviour
     private GameObject _GibPrefab;
     [SerializeField]
     private GameObject _ammoDrop;
-    private GameObject HUD;
 
     [SerializeField]
     private float _TooWeakToFight = 20f;
 
     public void Start()
     {
-        
+
     }
 
     public void TakeDamage(float damage)
